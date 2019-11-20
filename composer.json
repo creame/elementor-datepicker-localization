@@ -1,0 +1,34 @@
+{
+  "name": "creame/elementor-datepicker-localization",
+  "description": "Load current site locale for Elementor form datepicker",
+  "keywords": [
+    "wordpress",
+    "elementor",
+    "flatpickr",
+    "localization",
+    "datepicker"
+  ],
+  "type": "wordpress-plugin",
+  "homepage": "https://github.com/creame/elementor-datepicker-localization",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Creame",
+      "email": "hola@crea.me",
+      "homepage": "https://crea.me"
+    },
+    {
+      "name": "Pacotole",
+      "email": "pacotole@crea.me",
+      "homepage": "https://pacotole.com",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/creame/elementor-datepicker-localization/issues"
+  },
+  "require": {
+    "php": ">=5.3",
+    "wpackagist-plugin/elementor": "*"
+  }
+}
