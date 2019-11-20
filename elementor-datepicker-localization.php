@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name: Elementor Datepicker Localization
- * Plugin URI: http://wordpress.org/plugins/hello-dolly/
+ * Plugin URI: https://github.com/creame/elementor-datepicker-localization/
  * Description: Load current site locale for Elementor form datepicker.
+ * Version: 1.0.1
  * Author: Creame
- * Version: 1.0.0
  * Author URI: https://crea.me
  */
 
