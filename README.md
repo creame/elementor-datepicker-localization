@@ -14,7 +14,7 @@ $ wp plugin activate elementor-datepicker-localization
 
 #### Manual:
 
-* Download the [zip file](https://github.com/creame/creame/elementor-datepicker-localization/archive/master.zip)
+* Download the [zip file](https://github.com/creame/elementor-datepicker-localization/archive/master.zip)
 * Unzip to your sites plugin folder
 * Activate via WordPress
 
