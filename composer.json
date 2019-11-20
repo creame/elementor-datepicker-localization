@@ -1,5 +1,6 @@
 {
   "name": "creame/elementor-datepicker-localization",
+  "version": "1.0.0",
   "description": "Load current site locale for Elementor form datepicker",
   "keywords": [
     "wordpress",
