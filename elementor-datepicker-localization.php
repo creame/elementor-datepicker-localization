@@ -47,13 +47,15 @@ class ElementorDatepickerLocalization {
 	}
 
 	function datepicker_settings() {
-		$lang = wp_script_is( 'flatpickr_localize', 'enqueued' ) ? str_replace( '-', '_', $this->locale ) : '';
+		if ( wp_script_is( 'flatpickr', 'enqueued' ) ) {
+			$lang = wp_script_is( 'flatpickr_localize', 'enqueued' ) ? str_replace( '-', '_', $this->locale ) : '';
 
-		echo '<script>' .
-			"flatpickr.setDefaults({dateFormat:'$this->format', time_24hr:$this->time24}); " .
-			( $lang ? "flatpickr.localize(flatpickr.l10ns.$lang); " : '' ) .
-			( 'Y-m-d' !== $this->format ? "jQuery('.elementor-date-field').removeAttr('pattern');" : '' ) .
-			'</script>';
+			echo '<script>' .
+				"flatpickr.setDefaults({dateFormat:'$this->format', time_24hr:$this->time24}); " .
+				( $lang ? "flatpickr.localize(flatpickr.l10ns.$lang); " : '' ) .
+				( 'Y-m-d' !== $this->format ? "jQuery('.elementor-date-field').removeAttr('pattern');" : '' ) .
+				'</script>';
+		}
 	}
 
 	function get_locale() {
