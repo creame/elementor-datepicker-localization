@@ -58,6 +58,12 @@ add_filter( 'elementor/datepicker/24h', '__return_true' );
 
 ## Changelog
 
+### 1.3.0 - 14 Auguts 2020
+* Added native HTML output applies date format
+
+### 1.2.0 - 26 November 2019
+* Fix js error when datepickr not exists
+
 ### 1.1.0 - 26 November 2019
 * Added 'elementor/datepicker/24h' filter
 * Fix date field pattern throws form validation error if change default date format

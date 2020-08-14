@@ -3,7 +3,7 @@
  * Plugin Name: Elementor Datepicker Localization
  * Plugin URI: https://github.com/creame/elementor-datepicker-localization/
  * Description: Load current site locale for Elementor form datepicker.
- * Version: 1.1.0
+ * Version: 1.3.0
  * Author: Creame
  * Author URI: https://crea.me
  */
@@ -14,11 +14,11 @@ class ElementorDatepickerLocalization {
 	private $format;
 	private $time24;
 
-	function __construct() {
+	public function __construct() {
 		add_action( 'init', array( $this, 'init' ) );
 	}
 
-	function init() {
+	public function init() {
 		$this->locale = apply_filters( 'elementor/datepicker/locale', $this->get_locale() );
 		$this->format = apply_filters( 'elementor/datepicker/format', 'Y-m-d' );
 		$this->time24 = apply_filters( 'elementor/datepicker/24h', false ) ? 'true' : 'false';
@@ -31,13 +31,18 @@ class ElementorDatepickerLocalization {
 		}
 		// Apply locale and format
 		add_action( 'wp_footer', array( $this, 'datepicker_settings' ), 99 );
+
+		if ( 'Y-m-d' !== $this->format ) {
+			// Change native date output format
+			add_action( 'elementor_pro/forms/process/date', array( $this, 'change_date' ), 10, 2 );
+		}
 	}
 
-	function script_register() {
-		wp_register_script( 'flatpickr_localize', "https://npmcdn.com/flatpickr/dist/l10n/{$this->locale}.js", [ 'flatpickr' ] );
+	public function script_register() {
+		wp_register_script( 'flatpickr_localize', "https://npmcdn.com/flatpickr/dist/l10n/{$this->locale}.js", array( 'flatpickr' ) );
 	}
 
-	function script_enqueue( $item ) {
+	public function script_enqueue( $item ) {
 		if ( ! isset( $item['use_native_date'] ) || 'yes' !== $item['use_native_date'] ) {
 			wp_enqueue_script( 'flatpickr_localize' );
 			remove_filter( 'elementor_pro/forms/render/item/date', array( $this, 'script_enqueue' ) );
@@ -46,7 +51,7 @@ class ElementorDatepickerLocalization {
 		return $item;
 	}
 
-	function datepicker_settings() {
+	public function datepicker_settings() {
 		if ( wp_script_is( 'flatpickr', 'enqueued' ) ) {
 			$lang = wp_script_is( 'flatpickr_localize', 'enqueued' ) ? str_replace( '-', '_', $this->locale ) : '';
 
@@ -58,7 +63,7 @@ class ElementorDatepickerLocalization {
 		}
 	}
 
-	function get_locale() {
+	public function get_locale() {
 
 		// Relation WordPress languages with flatpickr languages
 		$locales = array(
@@ -195,6 +200,12 @@ class ElementorDatepickerLocalization {
 		return $locale;
 	}
 
+	public function change_date( $field, $record ) {
+		$unix = strtotime( str_replace( '/', '-', $field['raw_value'] ) );
+		if ($unix) {
+			$record->update_field( $field['id'], 'value', date( $this->format, $unix ) );
+		}
+	}
 }
 
 $elementor_datepickr_localization = new ElementorDatepickerLocalization();
